@@ -1,0 +1,40 @@
+// Fonts
+@import url('https://fonts.bunny.net/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+
+#contenedor {
+    width: 300px;
+    height: 200px;
+    overflow-y: scroll;
+    border: 1px solid #ccc;
+  }
+
+  /* Estilo para el scrollbar */
+  #contenedor_seguimientos::-webkit-scrollbar {
+    width: 10px; /* Ancho de la barra de desplazamiento */
+  }
+
+  #contenedor_seguimientos::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Color del fondo del track */
+    border-radius: 10px;
+  }
+
+  #contenedor_seguimientos::-webkit-scrollbar-thumb {
+    background: #45b39d; /* Color de la barra */
+    border-radius: 10px;
+  }
+
+  #contenedor_seguimientos::-webkit-scrollbar-thumb:hover {
+    background: #1abc9c ; /* Color al pasar el mouse */
+  }
+
+  .boxshadow{
+    -webkit-box-shadow: 2px 0px 4px 2px rgba(0,0,0,0.75);
+    -moz-box-shadow: 2px 0px 4px 2px rgba(0,0,0,0.75);
+    box-shadow: 2px 0px 4px 2px rgba(0,0,0,0.75);
+}
