@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('intraprom_id');
-            $table->bigInteger('rol_id');
             $table->string('name')->nullable();
+            $table->string('apaterno')->nullable();
+            $table->string('amaterno')->nullable();
             $table->string('email')->nullable();
             $table->string('usuario')->nullable();
             $table->string('password')->nullable();
+            $table->dateTime('deleted_at', 7)->nullable()->index();
             $table->timestamps(7);
         });
     }

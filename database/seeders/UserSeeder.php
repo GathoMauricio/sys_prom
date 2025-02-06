@@ -16,9 +16,9 @@ class UserSeeder extends Seeder
     {
 
         User::create([
-            'intraprom_id' => 0,
-            'rol_id' => 1,
-            'name' => 'Gatho Developer',
+            'name' => 'Gatho',
+            'apaterno' => 'KatzeSystems',
+            'amaterno' => 'Developer',
             'email' => 'mauricio2769@gmail.com',
             'usuario' => 'gatho',
             'password' => bcrypt('12345678'),

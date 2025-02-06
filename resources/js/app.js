@@ -1299,3 +1299,20 @@ window.validarImportacion = (rfc) => {
             );
         });
 };
+
+window.eliminarUsuario = (usuario_id) => {
+    alertify
+        .confirm(
+            "Eliminar", // Título de la ventana
+            "Atención: Está a punto de eliminar toda la información relacionada a este usuario.", // Mensaje del confirm
+            function () {
+                $("#form_eliminar_usuario_" + usuario_id).submit();
+            },
+            function () {}
+        )
+        .set("labels", {
+            ok: "Si, Eliminar",
+            cancel: "Cancelar",
+        }) // Cambia texto de los botones
+        .set("closable", false);
+};

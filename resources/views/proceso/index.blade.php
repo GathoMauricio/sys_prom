@@ -68,7 +68,7 @@
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="6" class="text-center">
+                                                <td colspan="7" class="text-center">
                                                     No se encontraron registros @if (request()->rfc)
                                                         con {{ request()->rfc }}
                                                     @endif

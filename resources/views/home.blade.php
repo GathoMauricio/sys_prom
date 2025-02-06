@@ -98,7 +98,7 @@
                                 @endcan
                                 @can('Ver usuarios')
                                     <div class="col-md-4">
-                                        <a href="#">
+                                        <a href="{{ route('user.index') }}">
                                             <div class="small-box" style="background-color: #1a7db9">
                                                 <div class="inner">
                                                     <h3 class="text-light">
