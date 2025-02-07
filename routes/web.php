@@ -66,5 +66,7 @@ Route::delete('/eliminar_empleado', [App\Http\Controllers\EmpleadoController::cl
 Route::get('/validar_importacion', [App\Http\Controllers\ValidacionController::class, 'validarImportacion'])->name('validar_importacion');
 Route::get('/importar_empleado/{rfc?}', [App\Http\Controllers\EmpleadoController::class, 'importarEmpleado'])->name('importar_empleado');
 Route::post('/store_importar_empleado', [App\Http\Controllers\EmpleadoController::class, 'storeImportacion'])->name('store_importar_empleado');
-
+Route::view('configuracion', 'configuracion.index')->name('configuracion');
+Route::get('inputs', [App\Http\Controllers\ConfiguracionController::class, 'inputs'])->name('inputs');
+Route::put('update_configs', [App\Http\Controllers\ConfiguracionController::class, 'update'])->name('update_configs');
 Route::resource('user', App\Http\Controllers\UserController::class);

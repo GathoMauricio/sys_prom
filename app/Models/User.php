@@ -24,6 +24,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'id',
+        'centro_costos_id',
         'name',
         'apaterno',
         'amaterno',
@@ -55,5 +56,10 @@ class User extends Authenticatable
     public function findForPassport($usuario)
     {
         return $this->where('usuario', $usuario)->first();
+    }
+
+    public function centro()
+    {
+        return $this->hasOne(CentroCostoIntraprom::class, 'IDCC', 'centro_costos_id')->withDefault();
     }
 }

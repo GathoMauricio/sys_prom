@@ -14,7 +14,7 @@
                                 @csrf
                                 @method('PUT')
                                 <div class="row">
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Nombre</label>
                                             <input type="text" name="name" value="{{ old('name', $usuario->name) }}"
@@ -26,7 +26,7 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label>A. Paterno</label>
                                             <input type="text" name="apaterno"
@@ -39,30 +39,51 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label>A. Materno</label>
                                             <input type="text" name="amaterno"
                                                 value="{{ old('amaterno', $usuario->amaterno) }}" class="form-control">
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label>Email</label>
-                                            <input type="email" name="email" value="{{ old('email', $usuario->email) }}"
-                                                class="form-control" required>
-                                            @error('email')
-                                                <span class="text-danger">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Email</label>
+                                                <input type="email" name="email"
+                                                    value="{{ old('email', $usuario->email) }}" class="form-control"
+                                                    required>
+                                                @error('email')
+                                                    <span class="text-danger">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Centro de costos</label>
+                                                <select name="centro_costos_id" class="form-select select2">
+                                                    <option value>--Seleccione una opción--</option>
+                                                    @foreach ($centros as $key => $centro)
+                                                        @if ($centro->IDCC == old('centro_costos_id', $usuario->centro_costos_id))
+                                                            <option value="{{ $centro->IDCC }}" selected>{{ $centro->CC }}
+                                                            </option>
+                                                        @else
+                                                            <option value="{{ $centro->IDCC }}">{{ $centro->CC }}
+                                                            </option>
+                                                        @endif
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label>Usuario</label>
+                                            <label>Rol</label>
                                             <select name="rol" class="form-select" required>
                                                 <option value>--Seleccione una opción--</option>
                                                 @foreach ($roles as $key => $rol)

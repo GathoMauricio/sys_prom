@@ -12,4 +12,17 @@ class ConfiguracionController extends Controller
         $configuracion = Configuracion::first();
         return response()->json($configuracion);
     }
+
+    public function inputs()
+    {
+        $configuracion = Configuracion::first();
+        return view('configuracion.inputs', compact('configuracion'));
+    }
+    public function update(Request $request)
+    {
+        $configuracion = Configuracion::first();
+        if ($configuracion->update($request->all())) {
+            return redirect()->back()->with('message', 'Configuración actualizada.');
+        }
+    }
 }

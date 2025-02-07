@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
+use App\Models\CentroCostoIntraprom;
 
 class UserController extends Controller
 {
@@ -17,7 +18,8 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::orderBy('name')->get();
-        return view('usuario.create', compact('roles'));
+        $centros = CentroCostoIntraprom::orderBy('CC')->get();
+        return view('usuario.create', compact('roles', 'centros'));
     }
 
     public function store(Request $request)
@@ -40,6 +42,7 @@ class UserController extends Controller
         ]);
 
         $usuario = User::create([
+            'centro_costos_id' => $request->centro_costos_id,
             'name' => $request->name,
             'apaterno' => $request->apaterno,
             'amaterno' => $request->amaterno,
@@ -56,7 +59,8 @@ class UserController extends Controller
     {
         $usuario = User::find($id);
         $roles = Role::orderBy('name')->get();
-        return view('usuario.edit', compact('usuario', 'roles'));
+        $centros = CentroCostoIntraprom::orderBy('CC')->get();
+        return view('usuario.edit', compact('usuario', 'roles', 'centros'));
     }
 
     public function update(Request $request, $id)

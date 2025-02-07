@@ -171,139 +171,151 @@
                                         <div class="form-group">
                                             <label for="pp">Plan Promocional <span
                                                     class="text-danger">*</span></label>
-                                            <select name="pp" id="cbo_pp" class="form-select select2" required>
-                                                <option value>--Seleccione una opción--</option>
-                                            </select>
+                                            @if (Auth::user()->hasRole(['Administracion', 'Ejecutivo']))
+                                                <select name="pp" id="cbo_pp" class="form-select select2"
+                                                    required>
+                                                    <option value>--Seleccione una opción--</option>
+                                                </select>
+                                            @else
+                                                <input type="text" value="{{ $plan->NCUENTA }}" class="form-control"
+                                                    readonly />
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            {{--  Esto solo lo puede ver el ejecutivo  --}}
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="fecha_ingreso">Fecha de ingreso <span
-                                                class="text-danger">*</span></label>
-                                        <input type="date" name="fecha_ingreso"
-                                            min="{{ Carbon\Carbon::now()->subDays(3)->toDateString() }}"
-                                            value="{{ $empleado->fecha_ingreso ? $empleado->fecha_ingreso : Carbon\Carbon::now()->toDateString() }}"
-                                            class="form-control" required />
+                            @if (Auth::user()->hasRole(['Administracion', 'Ejecutivo']))
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="fecha_ingreso">Fecha de ingreso <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="date" name="fecha_ingreso"
+                                                min="{{ Carbon\Carbon::now()->subDays(3)->toDateString() }}"
+                                                value="{{ $empleado->fecha_ingreso ? $empleado->fecha_ingreso : Carbon\Carbon::now()->toDateString() }}"
+                                                class="form-control" required />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="fecha_imss">Fecha de alta imss <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="date" name="fecha_imss"
+                                                min="{{ Carbon\Carbon::now()->subDays(3)->toDateString() }}"
+                                                value="{{ $empleado->fecha_imss ? $empleado->fecha_imss : Carbon\Carbon::now()->toDateString() }}"
+                                                class="form-control" required />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="puesto">Puesto <span class="text-danger">*</span></label>
+                                            <select name="puesto" id="cbo_puesto"
+                                                onchange="obtenerIdPuesto(this.value);" class="form-select select2"
+                                                required>
+                                                <option value>--Seleccione una opción--</option>
+                                                @foreach ($puestos as $puesto)
+                                                    <option value="{{ $puesto->Puesto_ID }}-{{ $puesto->Descripcion }}"
+                                                        @if ($puesto->Puesto_ID == $empleado->id_puesto) selected @endif>
+                                                        {{ $puesto->Descripcion }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            <input type="hidden" name="id_puesto" value="{{ $empleado->id_puesto }}"
+                                                id="txt_id_puesto">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="fecha_imss">Fecha de alta imss <span
-                                                class="text-danger">*</span></label>
-                                        <input type="date" name="fecha_imss"
-                                            min="{{ Carbon\Carbon::now()->subDays(3)->toDateString() }}"
-                                            value="{{ $empleado->fecha_imss ? $empleado->fecha_imss : Carbon\Carbon::now()->toDateString() }}"
-                                            class="form-control" required />
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="puesto">Puesto <span class="text-danger">*</span></label>
-                                        <select name="puesto" id="cbo_puesto" onchange="obtenerIdPuesto(this.value);"
-                                            class="form-select select2" required>
-                                            <option value>--Seleccione una opción--</option>
-                                            @foreach ($puestos as $puesto)
-                                                <option value="{{ $puesto->Puesto_ID }}-{{ $puesto->Descripcion }}"
-                                                    @if ($puesto->Puesto_ID == $empleado->id_puesto) selected @endif>
-                                                    {{ $puesto->Descripcion }}
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="sueldo_diario">Sueldo diario <span
+                                                    class="text-danger">*</span></label>
+                                            <select name="tipo_sueldo_diario" id="cbo_calcula_sueldos"
+                                                onchange="calculaSueldos()" class="form-select" required>
+                                                <option value>--Seleccione una opción--</option>
+                                                <option value="Resto del país"
+                                                    @if ($empleado->tipo_sueldo_diario == 'Resto del país') selected @endif>Resto del país
                                                 </option>
-                                            @endforeach
-                                        </select>
-                                        <input type="hidden" name="id_puesto" value="{{ $empleado->id_puesto }}"
-                                            id="txt_id_puesto">
+                                                <option value="Frontera" @if ($empleado->tipo_sueldo_diario == 'Frontera') selected @endif>
+                                                    Frontera</option>
+                                            </select>
+                                            <input type="text" name="sueldo_diario" id="txt_sueldo_diario"
+                                                value="{{ $empleado->sueldo_diario }}" class="form-control" readonly />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="premio_puntualidad">Premio por putualidad<span
+                                                    class="text-danger">*</span></label>
+                                            <select name="premio_puntualidad" onchange="calculaSueldos()"
+                                                id="cbo_premio_puntualidad" class="form-select">
+                                                <option value="SI" @if ($empleado->premio_puntualidad == 'SI') selected @endif>SI
+                                                </option>
+                                                <option value="NO" @if ($empleado->premio_puntualidad == 'NO') selected @endif>NO
+                                                </option>
+                                            </select>
+                                            <input type="text" name="premio_puntualidad_cant"
+                                                id="txt_premio_puntualidad_cant"
+                                                value="{{ $empleado->premio_puntualidad_cant }}" class="form-control"
+                                                readonly />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="premio_asistencia">Premio por asistencia<span
+                                                    class="text-danger">*</span></label>
+                                            <select name="premio_asistencia" onchange="calculaSueldos()"
+                                                id="cbo_premio_asistencia" class="form-select">
+                                                <option value="SI" @if ($empleado->premio_asistencia == 'SI') selected @endif>SI
+                                                </option>
+                                                <option value="NO" @if ($empleado->premio_asistencia == 'NO') selected @endif>NO
+                                                </option>
+                                            </select>
+                                            <input type="text" name="premio_asistencia_cant"
+                                                id="txt_premio_asistencia_cant"
+                                                value="{{ $empleado->premio_asistencia_cant }}" class="form-control"
+                                                readonly />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="despensa">Vales de despensa<span
+                                                    class="text-danger">*</span></label>
+                                            <select name="despensa" onchange="calculaSueldos()" id="cbo_despensa"
+                                                class="form-select">
+                                                <option value="SI" @if ($empleado->despensa == 'SI') selected @endif>SI
+                                                </option>
+                                                <option value="NO" @if ($empleado->despensa == 'NO') selected @endif>
+                                                    NO
+                                                </option>
+                                            </select>
+                                            <input type="text" name="despensa_cant" id="txt_despensa_cant"
+                                                value="{{ $empleado->despensa_cant }}" class="form-control" readonly />
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="sueldo_diario">Sueldo diario <span
-                                                class="text-danger">*</span></label>
-                                        <select name="tipo_sueldo_diario" id="cbo_calcula_sueldos"
-                                            onchange="calculaSueldos()" class="form-select" required>
-                                            <option value>--Seleccione una opción--</option>
-                                            <option value="Resto del país"
-                                                @if ($empleado->tipo_sueldo_diario == 'Resto del país') selected @endif>Resto del país</option>
-                                            <option value="Frontera" @if ($empleado->tipo_sueldo_diario == 'Frontera') selected @endif>
-                                                Frontera</option>
-                                        </select>
-                                        <input type="text" name="sueldo_diario" id="txt_sueldo_diario"
-                                            value="{{ $empleado->sueldo_diario }}" class="form-control" readonly />
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="reembolso_gasolina">Reembolso por gasolina<span
+                                                    class="text-danger">*</span></label>
+                                            <select name="reembolso_gasolina" class="form-select"
+                                                onchange="reembolsoGasolina()" id="cbo_reembolso_gasolina">
+                                                <option value="SI" @if ($empleado->reembolso_gasolina == 'SI') selected @endif>
+                                                    SI
+                                                </option>
+                                                <option value="NO" @if ($empleado->reembolso_gasolina == 'NO') selected @endif>
+                                                    NO
+                                                </option>
+                                            </select>
+                                            <input type="text" name="reembolso_gasolina_cant"
+                                                id="txt_reembolso_gasolina_cant"
+                                                value="{{ $empleado->reembolso_gasolina_cant }}" class="form-control"
+                                                readonly />
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="premio_puntualidad">Premio por putualidad<span
-                                                class="text-danger">*</span></label>
-                                        <select name="premio_puntualidad" onchange="calculaSueldos()"
-                                            id="cbo_premio_puntualidad" class="form-select">
-                                            <option value="SI" @if ($empleado->premio_puntualidad == 'SI') selected @endif>SI
-                                            </option>
-                                            <option value="NO" @if ($empleado->premio_puntualidad == 'NO') selected @endif>NO
-                                            </option>
-                                        </select>
-                                        <input type="text" name="premio_puntualidad_cant"
-                                            id="txt_premio_puntualidad_cant"
-                                            value="{{ $empleado->premio_puntualidad_cant }}" class="form-control"
-                                            readonly />
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="premio_asistencia">Premio por asistencia<span
-                                                class="text-danger">*</span></label>
-                                        <select name="premio_asistencia" onchange="calculaSueldos()"
-                                            id="cbo_premio_asistencia" class="form-select">
-                                            <option value="SI" @if ($empleado->premio_asistencia == 'SI') selected @endif>SI
-                                            </option>
-                                            <option value="NO" @if ($empleado->premio_asistencia == 'NO') selected @endif>NO
-                                            </option>
-                                        </select>
-                                        <input type="text" name="premio_asistencia_cant"
-                                            id="txt_premio_asistencia_cant"
-                                            value="{{ $empleado->premio_asistencia_cant }}" class="form-control"
-                                            readonly />
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="despensa">Vales de despensa<span class="text-danger">*</span></label>
-                                        <select name="despensa" onchange="calculaSueldos()" id="cbo_despensa"
-                                            class="form-select">
-                                            <option value="SI" @if ($empleado->despensa == 'SI') selected @endif>SI
-                                            </option>
-                                            <option value="NO" @if ($empleado->despensa == 'NO') selected @endif>NO
-                                            </option>
-                                        </select>
-                                        <input type="text" name="despensa_cant" id="txt_despensa_cant"
-                                            value="{{ $empleado->despensa_cant }}" class="form-control" readonly />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="reembolso_gasolina">Reembolso por gasolina<span
-                                                class="text-danger">*</span></label>
-                                        <select name="reembolso_gasolina" class="form-select"
-                                            onchange="reembolsoGasolina()" id="cbo_reembolso_gasolina">
-                                            <option value="SI" @if ($empleado->reembolso_gasolina == 'SI') selected @endif>SI
-                                            </option>
-                                            <option value="NO" @if ($empleado->reembolso_gasolina == 'NO') selected @endif>NO
-                                            </option>
-                                        </select>
-                                        <input type="text" name="reembolso_gasolina_cant"
-                                            id="txt_reembolso_gasolina_cant"
-                                            value="{{ $empleado->reembolso_gasolina_cant }}" class="form-control"
-                                            readonly />
-                                    </div>
-                                </div>
-                            </div>
-                            {{--  Hasta aquì --}}
+                            @endif
                         </div>
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary float-md-right">

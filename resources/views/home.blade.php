@@ -115,7 +115,7 @@
                                 @endcan
                                 @can('Ver configuracion')
                                     <div class="col-md-4">
-                                        <a href="#">
+                                        <a href="{{ route('configuracion') }}">
                                             <div class="small-box" style="background-color: #1a7db9">
                                                 <div class="inner">
                                                     <h3 class="text-light">

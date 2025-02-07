@@ -21,6 +21,7 @@
                                 <table class="table">
                                     <thead>
                                         <th>Rol</th>
+                                        <th>Centro de costo</th>
                                         <th>Nombre</th>
                                         <th>Usuario</th>
                                         <th>Email</th>
@@ -34,6 +35,7 @@
                                                         {{ $rol->name }}<br>
                                                     @endforeach
                                                 </td>
+                                                <td>{{ $usuario->centro->CC }}</td>
                                                 <td>{{ $usuario->name }} {{ $usuario->apaterno }} {{ $usuario->amaterno }}
                                                 </td>
                                                 <td>{{ $usuario->usuario }}</td>
