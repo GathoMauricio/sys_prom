@@ -79,6 +79,7 @@ class EmpleadoController extends Controller
             'estatus' => 'Precontrato',
             'json_empleado' => $empleado->toJson(),
         ]);
+        //TODO: email al ejecutivo
 
         if ($request->file('doc_solicitud_empleo'))
             $empleado->doc_solicitud_empleo = $this->guardarDocumento($request->file('doc_solicitud_empleo'), $empleado->id);
@@ -185,6 +186,8 @@ class EmpleadoController extends Controller
             'json_empleado' => $empleado->toJson(),
         ]);
 
+        //TODO: email al ejecutivo
+
         if ($request->file('doc_solicitud_empleo'))
             $empleado->doc_solicitud_empleo = $this->guardarDocumento($request->file('doc_solicitud_empleo'), $empleado->id);
         if ($request->file('doc_fotografia'))
@@ -251,6 +254,9 @@ class EmpleadoController extends Controller
             'estatus' => 'Precontrato',
             'json_empleado' => $empleado->toJson(),
         ]);
+
+        //TODO: email al ejecutivo
+
         $proceso->json_empleado = $empleado->toJson();
         $proceso->save();
         $rfc = base64_encode($empleado->rfc);

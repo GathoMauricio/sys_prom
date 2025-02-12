@@ -104,7 +104,7 @@
                                                     <h3 class="text-light">
                                                         {{ number_format($usuarios_sysprom) }}
                                                     </h3>
-                                                    <p style="color:white;">Usuarios SysProm</p>
+                                                    <p style="color:white;">Usuarios</p>
                                                 </div>
                                                 <div class="icon">
                                                     <i class="icon icon-users"></i>

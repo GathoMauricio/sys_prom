@@ -24,20 +24,19 @@ class UserSeeder extends Seeder
             'password' => bcrypt('12345678'),
         ]);
 
-        // $intraUsers = UserIntraprom::all();
-        // $this->command->getOutput()->writeln("Copiando usuarios de INTRAPROM a SYS_PROM:");
-        // $this->command->getOutput()->progressStart(count($intraUsers));
-        // foreach ($intraUsers as $u) {
-        //     User::create([
-        //         'intraprom_id' => $u->idusuario,
-        //         'rol_id' => 1,
-        //         'name' => $u->Nombre,
-        //         'email' => $u->mail,
-        //         'usuario' => $u->Usuario,
-        //         'password' => bcrypt($u->PWD),
-        //     ]);
-        //     $this->command->getOutput()->progressAdvance();
-        // }
-        // $this->command->getOutput()->progressFinish();
+        $intraUsers = UserIntraprom::all();
+        $this->command->getOutput()->writeln("Copiando usuarios de INTRAPROM a SYS_PROM:");
+        $this->command->getOutput()->progressStart(count($intraUsers));
+        foreach ($intraUsers as $u) {
+            User::create([
+                'intraprom_id' => $u->idusuario,
+                'name' => $u->Nombre,
+                'email' => $u->mail,
+                'usuario' => $u->Usuario,
+                'password' => bcrypt($u->PWD),
+            ]);
+            $this->command->getOutput()->progressAdvance();
+        }
+        $this->command->getOutput()->progressFinish();
     }
 }

@@ -110,7 +110,7 @@ class RolPermisoSeeder extends Seeder
         $imss->givePermissionTo('Cambiar estatus movimiento');
 
         //$permisos al usuario de pruebas
-        $user = User::find(1);
-        $user->assignRole(['Administracion']);
+        //$user = User::find(1);
+        //$user->assignRole(['Administracion']);
     }
 }

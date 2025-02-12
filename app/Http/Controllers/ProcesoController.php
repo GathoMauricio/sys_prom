@@ -39,7 +39,6 @@ class ProcesoController extends Controller
         $proceso->estatus_documentacion = "Aprobado";
         $proceso->json_empleado = $proceso->empleado->toJson();
         if ($proceso->save()) {
-            //TODO:Email a involucrados
             return response()->json([
                 'estatus' => 'OK',
                 'mensaje' => 'LA documentación ha sido aprobada,'
@@ -71,7 +70,6 @@ class ProcesoController extends Controller
                 $proceso->estatus_documentacion = "Aprobado";
                 $proceso->save();
             }
-            //TODO:Email a involucrados
             return response()->json([
                 'estatus' => 'OK',
                 'mensaje' => 'El documento ha sido aprobado,'
@@ -86,7 +84,7 @@ class ProcesoController extends Controller
         $proceso['estatus_' . $request->documento] = "Rechazado";
         $proceso->json_empleado = $proceso->empleado->toJson();
         if ($proceso->save()) {
-            //TODO:Email a involucrados
+            //TODO:Email al reclutador q creo el proceso
             return response()->json([
                 'estatus' => 'OK',
                 'mensaje' => 'El documento ha sido rechazado,'
@@ -137,7 +135,7 @@ class ProcesoController extends Controller
         ]);
 
         if ($proceso->save()) {
-            //TODO:Email a involucrados
+            //TODO:Email al que creo el proceso y a los de rh para validar documentacion
             return response()->json([
                 'estatus' => 'OK',
                 'mensaje' => 'El estatus del proceso ha sido actualizado,'
@@ -154,17 +152,8 @@ class ProcesoController extends Controller
         $proceso->empleado->save();
         $proceso->json_empleado = $proceso->empleado->toJson();
 
-        //$ultimo_movimiento = MovimientoSysprom::where('empleado_id', $proceso->empleado->id)->orderBy('created_at', 'DESC')->first();
-
-        // MovimientoSysprom::create([
-        //     'autor_id' => Auth::user()->id,
-        //     'empleado_id' => $proceso->empleado->id,
-        //     'consecutivo' => (int) $ultimo_movimiento->consecutivo + 1,
-        //     'tipo' => 'Baja', //ya que es reingreso desde Sicoss pero nuevo en SysProm
-        // ]);
-
         if ($proceso->save()) {
-            //TODO:Email a involucrados
+            //TODO:Email al que creo el proceso
             return response()->json([
                 'estatus' => 'OK',
                 'mensaje' => 'El estatus del proceso ha sido actualizado,'

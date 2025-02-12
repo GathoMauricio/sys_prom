@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\UserIntraprom;
 use Spatie\Permission\Models\Role;
 use App\Models\CentroCostoIntraprom;
 
@@ -11,7 +12,8 @@ class UserController extends Controller
 {
     public function index()
     {
-        $usuarios = User::orderBy('name')->paginate(15);
+        $usuarios = User::orderBy('Nombre')->paginate(15);
+        //$usuarios = UserIntraprom::orderBy('Nombre')->paginate(15);
         return view('usuario.index', compact('usuarios'));
     }
 

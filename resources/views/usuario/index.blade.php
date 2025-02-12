@@ -31,12 +31,14 @@
                                         @forelse($usuarios as $key => $usuario)
                                             <tr>
                                                 <td>
-                                                    @foreach ($usuario->roles as $key => $rol)
+                                                    {{--  @foreach ($usuario->roles as $key => $rol)
                                                         {{ $rol->name }}<br>
-                                                    @endforeach
+                                                    @endforeach  --}}
                                                 </td>
-                                                <td>{{ $usuario->centro->CC }}</td>
-                                                <td>{{ $usuario->name }} {{ $usuario->apaterno }} {{ $usuario->amaterno }}
+                                                <td>
+                                                    {{--  {{ $usuario->centro->CC }}  --}}
+                                                </td>
+                                                <td>{{ $usuario->Nombre }}
                                                 </td>
                                                 <td>{{ $usuario->usuario }}</td>
                                                 <td>{{ $usuario->email }}</td>
