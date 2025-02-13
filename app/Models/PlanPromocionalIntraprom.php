@@ -19,4 +19,9 @@ class PlanPromocionalIntraprom extends Model
         'NCUENTA',
         'IDCC',
     ];
+
+    public function centro_costo()
+    {
+        return $this->hasOne(CentroCostoIntraprom::class, 'IDCC', 'IDCC');
+    }
 }

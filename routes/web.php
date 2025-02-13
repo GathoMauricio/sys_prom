@@ -69,4 +69,6 @@ Route::post('/store_importar_empleado', [App\Http\Controllers\EmpleadoController
 Route::view('configuracion', 'configuracion.index')->name('configuracion');
 Route::get('inputs', [App\Http\Controllers\ConfiguracionController::class, 'inputs'])->name('inputs');
 Route::put('update_configs', [App\Http\Controllers\ConfiguracionController::class, 'update'])->name('update_configs');
-Route::resource('user', App\Http\Controllers\UserController::class);
+//Route::resource('user', App\Http\Controllers\UserController::class);
+Route::get('user', [App\Http\Controllers\UserController::class, 'index'])->name('user');
+Route::put('asignar_rol', [App\Http\Controllers\UserController::class, 'asignarRol'])->name('asignar_rol');

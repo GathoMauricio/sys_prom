@@ -42,25 +42,42 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        // Validar las credenciales del usuario (usa "username" en lugar de "email")
         $request->validate([
-            'usuario' => ['required', 'string'],
-            'password' => ['required', 'string'],
+            'Usuario' => ['required', 'string'],
+            'PWD' => ['required', 'string'],
         ]);
 
-        // Intentar autenticación con la columna "usuario"
-        if (!\Auth::attempt(['usuario' => $request->usuario, 'password' => $request->password], $request->boolean('remember'))) {
-            throw ValidationException::withMessages([
-                'usuario' => __('Estas credenciales no coinciden con nuestros registros.'),
-            ]);
+        $user = \App\Models\User::where('Usuario', $request->Usuario)->first();
+
+        if ($user && $request->PWD === $user->PWD) {
+            \Auth::login($user);
+            return redirect()->intended('home');
         }
 
-        // Regenerar la sesión tras iniciar sesión correctamente
-        $request->session()->regenerate();
-
-        // Redirigir al usuario autenticado
-        return redirect()->intended('home');
+        return back()->withErrors(['Usuario' => 'Credenciales incorrectas']);
     }
+
+    // public function login(Request $request)
+    // {
+    //     // Validar las credenciales del usuario (usa "username" en lugar de "email")
+    //     $request->validate([
+    //         'usuario' => ['required', 'string'],
+    //         'password' => ['required', 'string'],
+    //     ]);
+
+    //     // Intentar autenticación con la columna "usuario"
+    //     if (!\Auth::attempt(['usuario' => $request->usuario, 'password' => $request->password], $request->boolean('remember'))) {
+    //         throw ValidationException::withMessages([
+    //             'usuario' => __('Estas credenciales no coinciden con nuestros registros.'),
+    //         ]);
+    //     }
+
+    //     // Regenerar la sesión tras iniciar sesión correctamente
+    //     $request->session()->regenerate();
+
+    //     // Redirigir al usuario autenticado
+    //     return redirect()->intended('home');
+    // }
 
     public function logout(Request $request)
     {

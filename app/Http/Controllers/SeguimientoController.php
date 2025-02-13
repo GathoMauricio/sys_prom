@@ -18,7 +18,7 @@ class SeguimientoController extends Controller
     public function store(Request $request)
     {
         $seguimiento = SeguimientoSysProm::create([
-            'autor_id' => Auth::user()->id,
+            'autor_id' => Auth::user()->idusuario,
             'proceso_id' => $request->proceso_id,
             'contenido' => $request->contenido,
         ]);

@@ -121,7 +121,7 @@
         <footer class="main-footer">
             <!-- To the right -->
             <div class="float-right d-none d-sm-inline">
-                {{ Auth::user()->name }}
+                {{ Auth::user()->Nombre }}
             </div>
 
             <!-- Default to the left -->

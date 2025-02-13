@@ -49,7 +49,7 @@ class MovimientoController extends Controller
             $consecutivo = (int) $ultimo_movimiento->consecutivo + 1;
 
         $movimiento = MovimientoSysprom::create([
-            'autor_id' => Auth::user()->id,
+            'autor_id' => Auth::user()->idusuario,
             'proceso_id' => $proceso->id,
             'empleado_id' => $proceso->empleado->id,
             'consecutivo' => $consecutivo,

@@ -46,9 +46,9 @@ class RolPermisoSeeder extends Seeder
         Permission::create(['name' => 'Generar proceso de baja']);
         Permission::create(['name' => 'Enviar empleado a lista negra']);
         Permission::create(['name' => 'Quitar empleado de lista negra']);
-        Permission::create(['name' => 'Crear usuarios']);
+        //Permission::create(['name' => 'Crear usuarios']);
         Permission::create(['name' => 'Editar usuarios']);
-        Permission::create(['name' => 'Eliminar usuarios']);
+        //Permission::create(['name' => 'Eliminar usuarios']);
         //Permission::create(['name' => 'Importar empleado']);
         //Asignación
         $administracion->givePermissionTo('Roles y permisos');
@@ -72,9 +72,9 @@ class RolPermisoSeeder extends Seeder
         $administracion->givePermissionTo('Generar proceso de baja');
         $administracion->givePermissionTo('Enviar empleado a lista negra');
         $administracion->givePermissionTo('Quitar empleado de lista negra');
-        $administracion->givePermissionTo('Crear usuarios');
+        //$administracion->givePermissionTo('Crear usuarios');
         $administracion->givePermissionTo('Editar usuarios');
-        $administracion->givePermissionTo('Eliminar usuarios');
+        //$administracion->givePermissionTo('Eliminar usuarios');
         //$administracion->givePermissionTo('Importar empleado');
 
         $reclutamiento->givePermissionTo('Reclutar empleado');

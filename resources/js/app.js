@@ -1316,3 +1316,11 @@ window.eliminarUsuario = (usuario_id) => {
         }) // Cambia texto de los botones
         .set("closable", false);
 };
+
+window.asisgnarRol = (idusuario, rol_default) => {
+    $("#txt_idusuario").val(idusuario);
+    if (rol_default.length > 0) {
+        $("#cbo_roles").val(rol_default);
+    }
+    $("#modal_editar_rol").modal("show");
+};

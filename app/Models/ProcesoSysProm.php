@@ -36,7 +36,7 @@ class ProcesoSysProm extends Model
 
     public function autor()
     {
-        return $this->hasOne(User::class, 'id', 'autor_id');
+        return $this->hasOne(User::class, 'idusuario', 'autor_id');
     }
 
     public function empleado()

@@ -35,10 +35,15 @@ class User extends Authenticatable
         'idsicoss',
     ];
 
-    public function findForPassport($usuario)
+    public function planes()
     {
-        return $this->where('usuario', $usuario)->first();
+        return $this->hasMany('App\Models\UsuarioPlanPromocional', 'IdUsuario');
     }
+
+    // public function findForPassport($usuario)
+    // {
+    //     return $this->where('usuario', $usuario)->first();
+    // }
 
     // public function validateCredentials(Authenticatable $user, array $credentials)
     // {

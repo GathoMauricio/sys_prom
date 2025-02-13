@@ -73,7 +73,7 @@ class EmpleadoController extends Controller
         $empleado->estatus = "Precontrato";
 
         $proceso = ProcesoSysprom::create([
-            'autor_id' => Auth::user()->id,
+            'autor_id' => Auth::user()->idusuario,
             'empleado_id' => $empleado->id,
             'tipo' => 'Alta',
             'estatus' => 'Precontrato',
@@ -179,7 +179,7 @@ class EmpleadoController extends Controller
         $empleado->save();
 
         $proceso = ProcesoSysprom::create([
-            'autor_id' => Auth::user()->id,
+            'autor_id' => Auth::user()->idusuario,
             'empleado_id' => $empleado->id,
             'tipo' => 'Reingreso',
             'estatus' => 'Precontrato',
@@ -248,7 +248,7 @@ class EmpleadoController extends Controller
         $empleado->save();
 
         $proceso = ProcesoSysprom::create([
-            'autor_id' => Auth::user()->id,
+            'autor_id' => Auth::user()->idusuario,
             'empleado_id' => $empleado->id,
             'tipo' => 'Reingreso',
             'estatus' => 'Precontrato',
@@ -365,7 +365,7 @@ class EmpleadoController extends Controller
     {
         $lista_negra = ListaNegraSysprom::create(
             [
-                'autor_id' => Auth::user()->id,
+                'autor_id' => Auth::user()->idusuario,
                 'empleado_id' => $request->empleado_id,
                 'motivo' => $request->motivo,
             ]

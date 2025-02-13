@@ -48,16 +48,16 @@
                                 <form method="POST" action="{{ route('login') }}">
                                     @csrf
                                     <div class="row mb-3">
-                                        <label for="usuario" class="col-md-4 col-form-label text-md-end">
+                                        <label for="Usuario" class="col-md-4 col-form-label text-md-end">
                                             USUARIO
                                         </label>
                                         <div class="col-md-6">
-                                            <input id="usuario" type="usuario" placeholder="Ingrese su usuario"
-                                                class="form-control @error('usuario') is-invalid @enderror"
-                                                name="usuario" value="{{ old('usuario') }}" required
-                                                autocomplete="usuario" autofocus>
+                                            <input id="Usuario" type="text" placeholder="Ingrese su usuario"
+                                                class="form-control @error('Usuario') is-invalid @enderror"
+                                                name="Usuario" value="{{ old('Usuario') }}" required
+                                                autocomplete="Usuario" autofocus>
 
-                                            @error('usuario')
+                                            @error('Usuario')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -66,22 +66,22 @@
                                     </div>
 
                                     <div class="row mb-3">
-                                        <label for="password" class="col-md-4 col-form-label text-md-end">
+                                        <label for="PWD" class="col-md-4 col-form-label text-md-end">
                                             PASSWORD
                                         </label>
                                         <div class="col-md-6">
-                                            <input id="password" type="password" placeholder="**********"
-                                                class="form-control @error('password') is-invalid @enderror"
-                                                name="password" required autocomplete="current-password">
+                                            <input id="PWD" type="password" placeholder="**********"
+                                                class="form-control @error('PWD') is-invalid @enderror" name="PWD"
+                                                required autocomplete="current-password">
 
-                                            @error('password')
+                                            @error('PWD')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="row mb-3">
+                                    {{--  <div class="row mb-3">
                                         <div class="col-md-6 offset-md-4">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" name="remember"
@@ -92,7 +92,7 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>  --}}
                                     <div class="row">
                                         <div class="col-md-12 offset-md-12">
                                             {{--  <a class="btn btn-link" href="#">
