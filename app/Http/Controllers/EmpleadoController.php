@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 use App\Models\CentroCostoIntraprom;
 use App\Models\PlanPromocionalIntraprom;
 use App\Models\EmpleadoSiccos;
@@ -79,7 +80,41 @@ class EmpleadoController extends Controller
             'estatus' => 'Precontrato',
             'json_empleado' => $empleado->toJson(),
         ]);
-        //TODO: email al ejecutivo
+
+        $captura = new EmpleadoSysprom();
+        $captura->fill(json_decode($proceso->json_empleado, true));
+
+        //Se crea el join para obtener a los usuarios q pertenecen al cc y pp
+        $emails = DB::connection('sqlsrv_intraprom')->select("
+            SELECT u.Nombre, u.mail, cc.CC, pp.NCUENTA
+            FROM TUsuarios u
+            LEFT JOIN TUsuarioCtaModulo piv ON u.idusuario = piv.IdUsuario
+            LEFT JOIN Cuentas pp ON piv.IdCuenta = pp.IDCUENTA
+            LEFT JOIN Centrocostos cc ON pp.IDCC = cc.IDCC
+            WHERE piv.IdCuenta = ?
+        ", [$captura->pp]);
+        //Se obtienen los usuarios que coincidan con los email que trae la consulta anterior
+        $usuarios = User::where(function ($sql) use ($emails) {
+            foreach ($emails as $item) {
+                $sql->orWhere('mail', $item->mail);
+            }
+        })->get();
+        //Se recorren los usuarios para saber si son ejecutivos
+        $correos = [];
+        foreach ($usuarios as $usuario) {
+            //si el usuario es ejecutivo se guarda su correo en un arreglo
+            if ($usuario->mail && $usuario->hasRole('Ejecutivo'))
+                $correos[] = $usuario->mail;
+        }
+        //\Log::debug($correos);
+        //Se envia la notificacion a todos los correos en una sola peticion para no colapsar el sistema si son muchos correos
+        if (count($correos) > 0) {
+            \Mail::send('email.notificacion', ['proceso' => $proceso], function ($mail) use ($correos) {
+                $mail->subject('Alta Sysprom');
+                $mail->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
+                $mail->to($correos);
+            });
+        }
 
         if ($request->file('doc_solicitud_empleo'))
             $empleado->doc_solicitud_empleo = $this->guardarDocumento($request->file('doc_solicitud_empleo'), $empleado->id);
@@ -186,7 +221,40 @@ class EmpleadoController extends Controller
             'json_empleado' => $empleado->toJson(),
         ]);
 
-        //TODO: email al ejecutivo
+        $captura = new EmpleadoSysprom();
+        $captura->fill(json_decode($proceso->json_empleado, true));
+
+        //Se crea el join para obtener a los usuarios q pertenecen al cc y pp
+        $emails = DB::connection('sqlsrv_intraprom')->select("
+            SELECT u.Nombre, u.mail, cc.CC, pp.NCUENTA
+            FROM TUsuarios u
+            LEFT JOIN TUsuarioCtaModulo piv ON u.idusuario = piv.IdUsuario
+            LEFT JOIN Cuentas pp ON piv.IdCuenta = pp.IDCUENTA
+            LEFT JOIN Centrocostos cc ON pp.IDCC = cc.IDCC
+            WHERE piv.IdCuenta = ?
+        ", [$captura->pp]);
+        //Se obtienen los usuarios que coincidan con los email que trae la consulta anterior
+        $usuarios = User::where(function ($sql) use ($emails) {
+            foreach ($emails as $item) {
+                $sql->orWhere('mail', $item->mail);
+            }
+        })->get();
+        //Se recorren los usuarios para saber si son ejecutivos
+        $correos = [];
+        foreach ($usuarios as $usuario) {
+            //si el usuario es ejecutivo se guarda su correo en un arreglo
+            if ($usuario->mail && $usuario->hasRole('Ejecutivo'))
+                $correos[] = $usuario->mail;
+        }
+        //\Log::debug($correos);
+        //Se envia la notificacion a todos los correos en una sola peticion para no colapsar el sistema si son muchos correos
+        if (count($correos) > 0) {
+            \Mail::send('email.notificacion', ['proceso' => $proceso], function ($mail) use ($correos) {
+                $mail->subject('Reingreso Sicoss');
+                $mail->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
+                $mail->to($correos);
+            });
+        }
 
         if ($request->file('doc_solicitud_empleo'))
             $empleado->doc_solicitud_empleo = $this->guardarDocumento($request->file('doc_solicitud_empleo'), $empleado->id);
@@ -255,7 +323,40 @@ class EmpleadoController extends Controller
             'json_empleado' => $empleado->toJson(),
         ]);
 
-        //TODO: email al ejecutivo
+        $captura = new EmpleadoSysprom();
+        $captura->fill(json_decode($proceso->json_empleado, true));
+
+        //Se crea el join para obtener a los usuarios q pertenecen al cc y pp
+        $emails = DB::connection('sqlsrv_intraprom')->select("
+            SELECT u.Nombre, u.mail, cc.CC, pp.NCUENTA
+            FROM TUsuarios u
+            LEFT JOIN TUsuarioCtaModulo piv ON u.idusuario = piv.IdUsuario
+            LEFT JOIN Cuentas pp ON piv.IdCuenta = pp.IDCUENTA
+            LEFT JOIN Centrocostos cc ON pp.IDCC = cc.IDCC
+            WHERE piv.IdCuenta = ?
+        ", [$captura->pp]);
+        //Se obtienen los usuarios que coincidan con los email que trae la consulta anterior
+        $usuarios = User::where(function ($sql) use ($emails) {
+            foreach ($emails as $item) {
+                $sql->orWhere('mail', $item->mail);
+            }
+        })->get();
+        //Se recorren los usuarios para saber si son ejecutivos
+        $correos = [];
+        foreach ($usuarios as $usuario) {
+            //si el usuario es ejecutivo se guarda su correo en un arreglo
+            if ($usuario->mail && $usuario->hasRole('Ejecutivo'))
+                $correos[] = $usuario->mail;
+        }
+        //\Log::debug($correos);
+        //Se envia la notificacion a todos los correos en una sola peticion para no colapsar el sistema si son muchos correos
+        if (count($correos) > 0) {
+            \Mail::send('email.notificacion', ['proceso' => $proceso], function ($mail) use ($correos) {
+                $mail->subject('Reingreso Sysprom');
+                $mail->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
+                $mail->to($correos);
+            });
+        }
 
         $proceso->json_empleado = $empleado->toJson();
         $proceso->save();

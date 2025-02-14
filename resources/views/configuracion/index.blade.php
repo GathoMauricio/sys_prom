@@ -30,7 +30,7 @@
                                         </a>
                                     </div>
                                 @endcan
-                                @can('Ver procesos')
+                                @can('Modificar inputs')
                                     <div class="col-md-4">
                                         <a href="{{ route('inputs') }}">
                                             <div class="small-box" style="background-color: #1a7db9">
@@ -39,6 +39,23 @@
                                                         Inputs
                                                     </h3>
                                                     <p style="color:white;">Configuración de "inputs"</p>
+                                                </div>
+                                                <div class="icon">
+                                                    <i class="icon icon-notification"></i>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                @endcan
+                                @can('Modificar sepomex')
+                                    <div class="col-md-4">
+                                        <a href="{{ route('sepomex') }}">
+                                            <div class="small-box" style="background-color: #1a7db9">
+                                                <div class="inner">
+                                                    <h3 class="text-light">
+                                                        Sepomex
+                                                    </h3>
+                                                    <p style="color:white;">Configuración de "frontera"</p>
                                                 </div>
                                                 <div class="icon">
                                                     <i class="icon icon-notification"></i>

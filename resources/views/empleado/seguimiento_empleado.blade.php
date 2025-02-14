@@ -231,8 +231,8 @@
                                             <label for="sueldo_diario">Sueldo diario <span
                                                     class="text-danger">*</span></label>
                                             <select name="tipo_sueldo_diario" id="cbo_calcula_sueldos"
-                                                onchange="calculaSueldos()" class="form-select" required>
-                                                <option value>--Seleccione una opción--</option>
+                                                onchange="calculaSueldos()" class="form-select" disabled>
+                                                <option value>--Cargando--</option>
                                                 <option value="Resto del país"
                                                     @if ($empleado->tipo_sueldo_diario == 'Resto del país') selected @endif>Resto del país
                                                 </option>
@@ -403,79 +403,6 @@
                                     'editar_documento' => true,
                                 ])
                             </div>
-
-
-                            {{--  <table class="table table-striped table-bordered">
-                                <tbody>
-                                    @include('empleado.tr_seguimiento_documento', [
-                                        'model' => $empleado,
-                                        'var_documento' => 'doc_solicitud_empleo',
-                                        'nombre_documento' => 'Solicitud de Empleo',
-                                        'editar_documento' => true,
-                                    ])
-                                    @include('empleado.tr_seguimiento_documento', [
-                                        'model' => $empleado,
-                                        'var_documento' => 'doc_fotografia',
-                                        'nombre_documento' => 'Fotografía',
-                                        'editar_documento' => true,
-                                    ])
-                                    @include('empleado.tr_seguimiento_documento', [
-                                        'model' => $empleado,
-                                        'var_documento' => 'doc_ine',
-                                        'nombre_documento' => 'INE',
-                                        'editar_documento' => true,
-                                    ])
-                                    @include('empleado.tr_seguimiento_documento', [
-                                        'model' => $empleado,
-                                        'var_documento' => 'doc_acta_nacimiento',
-                                        'nombre_documento' => 'Acta de Nacimiento',
-                                        'editar_documento' => true,
-                                    ])
-                                    @include('empleado.tr_seguimiento_documento', [
-                                        'model' => $empleado,
-                                        'var_documento' => 'doc_nss',
-                                        'nombre_documento' => 'Número de Seguro Social',
-                                        'editar_documento' => true,
-                                    ])
-                                    @include('empleado.tr_seguimiento_documento', [
-                                        'model' => $empleado,
-                                        'var_documento' => 'doc_comprobante_domicilio',
-                                        'nombre_documento' => 'Comprobante de Domicilio',
-                                        'editar_documento' => true,
-                                    ])
-                                    @include('empleado.tr_seguimiento_documento', [
-                                        'model' => $empleado,
-                                        'var_documento' => 'doc_comprobante_estudios',
-                                        'nombre_documento' => 'Comprobante de Estudios',
-                                        'editar_documento' => true,
-                                    ])
-                                    @include('empleado.tr_seguimiento_documento', [
-                                        'model' => $empleado,
-                                        'var_documento' => 'doc_curp',
-                                        'nombre_documento' => 'CURP',
-                                        'editar_documento' => true,
-                                    ])
-                                    @include('empleado.tr_seguimiento_documento', [
-                                        'model' => $empleado,
-                                        'var_documento' => 'doc_csf',
-                                        'nombre_documento' => 'Constancia de Situación Fiscal',
-                                        'editar_documento' => true,
-                                    ])
-                                    @include('empleado.tr_seguimiento_documento', [
-                                        'model' => $empleado,
-                                        'var_documento' => 'doc_soporte_bancario',
-                                        'nombre_documento' => 'Soporte Bancario',
-                                        'editar_documento' => true,
-                                    ])
-                                    @include('empleado.tr_seguimiento_documento', [
-                                        'model' => $empleado,
-                                        'var_documento' => 'doc_contrato',
-                                        'nombre_documento' => 'Contrato',
-                                        'editar_documento' => true,
-                                    ])
-                                </tbody>
-                            </table>  --}}
-
                         </div>
                     </div>
                 </div>
@@ -562,6 +489,7 @@
             getSepomex($("#cp_input").val());
             setTimeout(function() {
                 $("#cbo_pp").val('{{ $empleado->pp }}').trigger('change');
+                cargarSueldo($("#txt_delegacion_numicipio_sepomex").val());
             }, 2000);
         });
     </script>

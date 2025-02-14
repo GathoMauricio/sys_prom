@@ -22,6 +22,9 @@ class SeguimientoController extends Controller
             'proceso_id' => $request->proceso_id,
             'contenido' => $request->contenido,
         ]);
+
+        //TODO: Notificar seguimiento
+
         $rfc = base64_encode($seguimiento->proceso->empleado->rfc);
         return redirect()->back()->with('message', 'El seguimiento ha sido enviado.');
     }

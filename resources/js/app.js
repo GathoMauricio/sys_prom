@@ -1324,3 +1324,44 @@ window.asisgnarRol = (idusuario, rol_default) => {
     }
     $("#modal_editar_rol").modal("show");
 };
+
+window.cambiarFrontera = (frontera, municipio) => {
+    console.log(frontera + " " + municipio);
+    const r_cambiar_frontera = $("#r_cambiar_frontera").val();
+    axios
+        .post(r_cambiar_frontera, {
+            _method: "PUT",
+            frontera: frontera,
+            municipio: municipio,
+        })
+        .then((response) => {
+            console.log(response.data);
+            if (response.data.estatus == "OK") {
+                successNotification(response.data.mensaje);
+            }
+        })
+        .catch((error) => {
+            console.error(
+                "Error en la petición:",
+                error.response ? error.response.data : error.message
+            );
+        });
+};
+
+window.cargarSueldo = (municipio) => {
+    const r_cargar_sueldo = $("#r_cargar_sueldo").val();
+    axios
+        .get(r_cargar_sueldo + "/" + municipio)
+        .then((response) => {
+            console.log(response.data);
+            if (response.data.frontera == "NO") {
+                $("#cbo_calcula_sueldos").val("Resto del país");
+            } else {
+                $("#cbo_calcula_sueldos").val("Frontera");
+            }
+            setTimeout(calculaSueldos, 500);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+};

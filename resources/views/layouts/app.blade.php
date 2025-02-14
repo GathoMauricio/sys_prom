@@ -172,6 +172,8 @@
     <input type="hidden" id="r_eliminar_empleado" value="{{ route('eliminar_empleado') }}">
     <input type="hidden" id="r_validar_importacion" value="{{ route('validar_importacion') }}">
     <input type="hidden" id="r_importar_empleado" value="{{ route('importar_empleado') }}">
+    <input type="hidden" id="r_cambiar_frontera" value="{{ route('cambiar_frontera') }}">
+    <input type="hidden" id="r_cargar_sueldo" value="{{ route('cargar_sueldo') }}">
 </body>
 
 </html>

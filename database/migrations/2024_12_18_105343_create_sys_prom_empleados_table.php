@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('tipo')->nullable();
             $table->string('estatus')->nullable();
             $table->bigInteger('sicoss_id')->nullable();
+            $table->bigInteger('sepomex_id')->nullable();
             $table->string('nombre')->nullable();
             $table->string('apaterno')->nullable();
             $table->string('amaterno')->nullable();
@@ -40,22 +41,16 @@ return new class extends Migration
             $table->date('fecha_imss')->nullable();
             $table->text('puesto')->nullable();
             $table->text('id_puesto')->nullable();
-
             $table->string('tipo_sueldo_diario', 20)->nullable();
             $table->double('sueldo_diario', 6, 2)->default(0)->nullable();
-
             $table->string('premio_puntualidad', 2)->default('NO')->nullable();
             $table->double('premio_puntualidad_cant', 6, 2)->default(0)->nullable();
-
             $table->string('premio_asistencia', 2)->default('NO')->nullable();
             $table->double('premio_asistencia_cant', 6, 2)->default(0)->nullable();
-
             $table->string('despensa', 2)->default('NO')->nullable();
             $table->double('despensa_cant', 6, 2)->default(0)->nullable();
-
             $table->string('reembolso_gasolina', 2)->default('NO')->nullable();
             $table->double('reembolso_gasolina_cant', 6, 2)->default(0)->nullable();
-
             $table->string('doc_solicitud_empleo')->nullable();
             $table->string('doc_fotografia')->nullable();
             $table->string('doc_ine')->nullable();

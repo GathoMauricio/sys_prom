@@ -25,5 +25,6 @@ class Sepomex extends Model
         'cp',
         'asentamiento',
         'tipo',
+        'frontera',
     ];
 }

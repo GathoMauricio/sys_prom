@@ -50,6 +50,8 @@ class RolPermisoSeeder extends Seeder
         Permission::create(['name' => 'Editar usuarios']);
         //Permission::create(['name' => 'Eliminar usuarios']);
         //Permission::create(['name' => 'Importar empleado']);
+        Permission::create(['name' => 'Modificar inputs']);
+        Permission::create(['name' => 'Modificar sepomex']);
         //Asignación
         $administracion->givePermissionTo('Roles y permisos');
         $administracion->givePermissionTo('Reclutar empleado');
@@ -76,6 +78,8 @@ class RolPermisoSeeder extends Seeder
         $administracion->givePermissionTo('Editar usuarios');
         //$administracion->givePermissionTo('Eliminar usuarios');
         //$administracion->givePermissionTo('Importar empleado');
+        $administracion->givePermissionTo('Modificar inputs');
+        $administracion->givePermissionTo('Modificar sepomex');
 
         $reclutamiento->givePermissionTo('Reclutar empleado');
         $reclutamiento->givePermissionTo('Ver seguimiento empleado');

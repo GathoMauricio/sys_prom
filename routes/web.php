@@ -41,6 +41,7 @@ Route::post('/store_reingreso_sysprom_empleado', [App\Http\Controllers\EmpleadoC
 Route::get('/seguimiento_empleado/{rfc?}', [App\Http\Controllers\EmpleadoController::class, 'edit'])->name('seguimiento_empleado');
 Route::put('/update_empleado/{id}', [App\Http\Controllers\EmpleadoController::class, 'update'])->name('update_empleado');
 Route::get('/get_sepomex/{cp?}', [App\Http\Controllers\SepomexController::class, 'getSepomex'])->name('get_sepomex');
+Route::get('/cargar_sueldo/{municipio?}', [App\Http\Controllers\SepomexController::class, 'cargarSueldo'])->name('cargar_sueldo');
 Route::get('/get_planes/{IDCC?}', [App\Http\Controllers\CatalogoController::class, 'getPlanes'])->name('get_planes');
 Route::get('/validar_nss_alta/{nss?}', [App\Http\Controllers\ValidacionController::class, 'validarNssAlta'])->name('validar_nss_alta');
 Route::post('/actualizar_documento', [App\Http\Controllers\EmpleadoController::class, 'actualizarDocumento'])->name('actualizar_documento');
@@ -69,6 +70,14 @@ Route::post('/store_importar_empleado', [App\Http\Controllers\EmpleadoController
 Route::view('configuracion', 'configuracion.index')->name('configuracion');
 Route::get('inputs', [App\Http\Controllers\ConfiguracionController::class, 'inputs'])->name('inputs');
 Route::put('update_configs', [App\Http\Controllers\ConfiguracionController::class, 'update'])->name('update_configs');
-//Route::resource('user', App\Http\Controllers\UserController::class);
+Route::put('cambiar_frontera', [App\Http\Controllers\SepomexController::class, 'cambiarFrontera'])->name('cambiar_frontera');
 Route::get('user', [App\Http\Controllers\UserController::class, 'index'])->name('user');
 Route::put('asignar_rol', [App\Http\Controllers\UserController::class, 'asignarRol'])->name('asignar_rol');
+Route::get('sepomex', [App\Http\Controllers\SepomexController::class, 'index'])->name('sepomex');
+Route::get('test_mail', function () {
+    \Mail::send('email.notificacion', [], function ($mail) {
+        $mail->subject('Test');
+        $mail->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
+        $mail->to(['mauricio2769@gmail.com']);
+    });
+})->name('test_mail');

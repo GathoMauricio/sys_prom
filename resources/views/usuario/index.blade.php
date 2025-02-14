@@ -13,10 +13,34 @@
                             </div>
                             <br>
                         @endcan  --}}
-                        Usuarios
+                        <a href="{{ route('user') }}" style="color:white;">
+                            Usuarios
+                        </a>
                     </div>
                     <div class="card-body">
                         <div class="container">
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
+                                    <form action="{{ route('user') }}">
+                                        <table>
+                                            <tr>
+                                                <td width="90%">
+                                                    <input type="email" name="email" class="form-control"
+                                                        placeholder="Buscar email..."
+                                                        @if (request()->email) value="{{ request()->email }}" @endif
+                                                        required>
+                                                </td>
+                                                <td width="10%">
+                                                    <button type="submit" class="btn btn-primary"><span
+                                                            class="icon icon-search"></span></button>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                </div>
+                            </div>
                             <div style="width: 100%;overflow:hidden;overflow-x:scroll;">
                                 {{ $usuarios->links('pagination::bootstrap-4') }}
                                 <table class="table">
@@ -85,6 +109,9 @@
                                                 </td>
                                             </tr>
                                         @empty
+                                            <tr>
+                                                <td colspan="6" class="text-center">Sin resultados</td>
+                                            </tr>
                                         @endforelse
                                         </body>
                                 </table>

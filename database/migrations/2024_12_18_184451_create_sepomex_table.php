@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('cp')->nullable();
             $table->string('asentamiento')->nullable();
             $table->string('tipo')->nullable();
+            $table->string('frontera')->default('NO');
             $table->timestamps(7);
         });
     }

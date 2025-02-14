@@ -10,9 +10,13 @@ use App\Models\CentroCostoIntraprom;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $usuarios = User::orderBy('idusuario')->paginate(15);
+        $usuarios = new User();
+        if ($request->email) {
+            $usuarios = $usuarios->where('mail', $request->email);
+        }
+        $usuarios = $usuarios->orderBy('idusuario')->paginate(15);
         $roles = Role::orderBy('name')->get();
         return view('usuario.index', compact('usuarios', 'roles'));
     }
