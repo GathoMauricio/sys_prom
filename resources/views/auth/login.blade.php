@@ -41,7 +41,7 @@
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-header text-light" style="background:#263572;">
-                                INGRESE SUS CREDENCIALES A CONTINIACIÓN
+                                INGRESE SUS CREDENCIALES A CONTINUACIÓN
                             </div>
 
                             <div class="card-body">
