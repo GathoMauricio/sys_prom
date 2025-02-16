@@ -109,7 +109,7 @@ class EmpleadoController extends Controller
         //\Log::debug($correos);
         //Se envia la notificacion a todos los correos en una sola peticion para no colapsar el sistema si son muchos correos
         if (count($correos) > 0) {
-            \Mail::send('email.notificacion', ['proceso' => $proceso], function ($mail) use ($correos) {
+            \Mail::send('email.proceso', ['proceso' => $proceso], function ($mail) use ($correos) {
                 $mail->subject('Alta Sysprom');
                 $mail->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
                 $mail->to($correos);
@@ -249,7 +249,7 @@ class EmpleadoController extends Controller
         //\Log::debug($correos);
         //Se envia la notificacion a todos los correos en una sola peticion para no colapsar el sistema si son muchos correos
         if (count($correos) > 0) {
-            \Mail::send('email.notificacion', ['proceso' => $proceso], function ($mail) use ($correos) {
+            \Mail::send('email.proceso', ['proceso' => $proceso], function ($mail) use ($correos) {
                 $mail->subject('Reingreso Sicoss');
                 $mail->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
                 $mail->to($correos);
@@ -351,7 +351,7 @@ class EmpleadoController extends Controller
         //\Log::debug($correos);
         //Se envia la notificacion a todos los correos en una sola peticion para no colapsar el sistema si son muchos correos
         if (count($correos) > 0) {
-            \Mail::send('email.notificacion', ['proceso' => $proceso], function ($mail) use ($correos) {
+            \Mail::send('email.proceso', ['proceso' => $proceso], function ($mail) use ($correos) {
                 $mail->subject('Reingreso Sysprom');
                 $mail->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
                 $mail->to($correos);

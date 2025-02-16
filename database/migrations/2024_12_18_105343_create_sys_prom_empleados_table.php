@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('tipo')->nullable();
             $table->string('estatus')->nullable();
             $table->bigInteger('sicoss_id')->nullable();
-            $table->bigInteger('sepomex_id')->nullable();
             $table->string('nombre')->nullable();
             $table->string('apaterno')->nullable();
             $table->string('amaterno')->nullable();

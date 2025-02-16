@@ -3,18 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\LoginController;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
-// Login routes
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
@@ -74,10 +63,3 @@ Route::put('cambiar_frontera', [App\Http\Controllers\SepomexController::class, '
 Route::get('user', [App\Http\Controllers\UserController::class, 'index'])->name('user');
 Route::put('asignar_rol', [App\Http\Controllers\UserController::class, 'asignarRol'])->name('asignar_rol');
 Route::get('sepomex', [App\Http\Controllers\SepomexController::class, 'index'])->name('sepomex');
-Route::get('test_mail', function () {
-    \Mail::send('email.notificacion', [], function ($mail) {
-        $mail->subject('Test');
-        $mail->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
-        $mail->to(['mauricio2769@gmail.com']);
-    });
-})->name('test_mail');

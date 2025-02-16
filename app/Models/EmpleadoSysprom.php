@@ -20,7 +20,6 @@ class EmpleadoSysprom extends Model
         'tipo',
         'estatus',
         'sicoss_id',
-        'sepomex_id',
         'nombre',
         'apaterno',
         'amaterno',
