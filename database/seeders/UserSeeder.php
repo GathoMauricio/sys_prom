@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $admin = User::where('Usuario', 'rgaribay')->first();
+        $admin = User::find(68);
         $admin->assignRole(['Administracion']);
         // User::create([
         //     'name' => 'Gatho',

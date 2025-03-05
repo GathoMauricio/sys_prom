@@ -6,6 +6,8 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Auth\Events\Logout;
+use Illuminate\Support\Facades\Session;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -25,7 +27,11 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        parent::boot();
+
+        Event::listen(Logout::class, function () {
+            Session::flush(); // Limpia cualquier dato antes de que falle el sistema
+        });
     }
 
     /**

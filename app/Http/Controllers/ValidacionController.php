@@ -14,6 +14,20 @@ class ValidacionController extends Controller
 {
     public function validarRFCSat(Request $request)
     {
+        return json_decode('
+            {
+                "codigo": "string",
+                "mensaje": "string",
+                "rfc": [
+                    {
+                    "rfc": "string",
+                    "esValido": true,
+                    "estatus": "string",
+                    "usosCFDIPermitidos": "string"
+                    }
+                ]
+                }
+            ');
         if (env('APP_DEBUG')) {
             return json_decode('
             {
